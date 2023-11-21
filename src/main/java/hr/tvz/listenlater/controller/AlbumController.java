@@ -22,8 +22,8 @@ public class AlbumController {
         return new ResponseEntity<>(entities, HttpStatus.OK);
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<Album> getEntity(@RequestBody final int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Album> getEntity(@PathVariable final int id) {
         Album entity = this.albumService.getEntity(id);
         return new ResponseEntity<>(entity, HttpStatus.OK);
     }
@@ -35,13 +35,13 @@ public class AlbumController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Album> updateEntity(@RequestBody final int id, final Album album) {
+    public ResponseEntity<Album> updateEntity(@PathVariable final int id, @RequestBody final Album album) {
         Album updatedEntity = this.albumService.updateEntity(id, album);
         return new ResponseEntity<>(updatedEntity, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteEntity(@RequestBody final int id) {
+    public ResponseEntity<Boolean> deleteEntity(@PathVariable final int id) {
         boolean deletedEntity = this.albumService.deleteEntity(id);
         return new ResponseEntity<>(deletedEntity, HttpStatus.OK);
     }

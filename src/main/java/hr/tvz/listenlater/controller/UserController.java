@@ -22,8 +22,8 @@ public class UserController {
         return new ResponseEntity<>(entities, HttpStatus.OK);
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<User> getEntity(@RequestBody final int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getEntity(@PathVariable final int id) {
         User entity = this.userService.getEntity(id);
         return new ResponseEntity<>(entity, HttpStatus.OK);
     }
@@ -35,13 +35,13 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateEntity(@RequestBody final int id, final User user) {
+    public ResponseEntity<User> updateEntity(@PathVariable final int id, @RequestBody final User user) {
         User updatedEntity = this.userService.updateEntity(id, user);
         return new ResponseEntity<>(updatedEntity, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteEntity(@RequestBody final int id) {
+    public ResponseEntity<Boolean> deleteEntity(@PathVariable final int id) {
         boolean deletedEntity = this.userService.deleteEntity(id);
         return new ResponseEntity<>(deletedEntity, HttpStatus.OK);
     }
