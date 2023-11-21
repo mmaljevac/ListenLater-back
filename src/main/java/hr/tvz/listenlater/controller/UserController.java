@@ -4,6 +4,7 @@ import hr.tvz.listenlater.model.User;
 import hr.tvz.listenlater.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> addNewEntity(@RequestBody User user) {
+    public ResponseEntity<User> addNewEntity(@RequestBody final User user) {
         User addedEntity = this.userService.addNewEntity(user);
         return new ResponseEntity<>(addedEntity, HttpStatus.CREATED);
     }

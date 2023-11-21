@@ -51,12 +51,11 @@ public class AlbumRepository {
         jdbc.update("UPDATE TABLE_ALBUM SET " +
                         "NAME = ?," +
                         "ARTIST = ?," +
-                        "ID_USER = ?," +
+                        "ID_USER = ? " +
                         "WHERE ID = ?",
                 album.getName(),
                 album.getArtist(),
                 album.getIdUser(),
-                album.getId(),
                 id
         );
 

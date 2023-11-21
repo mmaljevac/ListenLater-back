@@ -29,7 +29,7 @@ public class AlbumController {
     }
 
     @PostMapping
-    public ResponseEntity<Album> addNewEntity(@RequestBody Album album) {
+    public ResponseEntity<Album> addNewEntity(@RequestBody final Album album) {
         Album addedEntity = this.albumService.addNewEntity(album);
         return new ResponseEntity<>(addedEntity, HttpStatus.CREATED);
     }
