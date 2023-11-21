@@ -16,7 +16,7 @@ public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Long id;
+    private int id;
 
     @Column(name = "NAME")
     private String name;
@@ -25,6 +25,6 @@ public class Album {
     private String artist;
 
     @Column(name = "ID_USER")
-    private Long idUser;
+    private int idUser;
 
 }
