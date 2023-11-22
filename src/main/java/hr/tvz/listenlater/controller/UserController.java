@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> addNewEntity(@RequestBody final User user) {
+    public ResponseEntity<User> addNewEntity(@RequestBody final User user) throws Exception {
         User addedEntity = this.userService.addNewEntity(user);
         return new ResponseEntity<>(addedEntity, HttpStatus.CREATED);
     }

@@ -43,7 +43,11 @@ public class UserRepository {
                 this::mapRowToUser).get(0);
     }
 
-    public User addNewEntity(User user) {
+    public User addNewEntity(User user) throws Exception {
+        if (this.findByEmail(user.getEmail()) != null) {
+            throw new Exception("User with this email already exists.");
+        }
+
         Map<String,Object> parameters = new HashMap<>();
 
         parameters.put("USERNAME",user.getUsername());

@@ -33,7 +33,7 @@ public class UserService {
         return this.userRepository.getEntity(id);
     }
 
-    public User addNewEntity(User user) {
+    public User addNewEntity(User user) throws Exception {
         return this.userRepository.addNewEntity(user);
     }
 

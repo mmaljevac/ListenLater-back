@@ -25,7 +25,7 @@ public class AlbumRepository {
     }
 
     public List<Album> getAlbumsByUser(int id) {
-        return jdbc.query("SELECT * FROM TABLE_ALBUM WHERE ID_USER = " + id,
+        return jdbc.query("SELECT * FROM TABLE_ALBUM WHERE ID_USER = " + id + " ORDER BY ARTIST ASC",
                 this::mapRowToAlbum);
     }
     public List<Album> getAllEntities() {
