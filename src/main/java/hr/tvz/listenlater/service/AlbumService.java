@@ -15,6 +15,10 @@ public class AlbumService {
     @Autowired
     private final AlbumRepository albumRepository;
 
+    public List<Album> getAlbumsByUser(int id) {
+        return this.albumRepository.getAlbumsByUser(id);
+    }
+
     public List<Album> getAllEntities() {
         return this.albumRepository.getAllEntities();
     }

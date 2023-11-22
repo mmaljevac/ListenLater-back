@@ -24,6 +24,10 @@ public class AlbumRepository {
                 .usingGeneratedKeyColumns("ID");
     }
 
+    public List<Album> getAlbumsByUser(int id) {
+        return jdbc.query("SELECT * FROM TABLE_ALBUM WHERE ID_USER = " + id,
+                this::mapRowToAlbum);
+    }
     public List<Album> getAllEntities() {
         return jdbc.query("SELECT * FROM TABLE_ALBUM",
                 this::mapRowToAlbum);
@@ -39,6 +43,7 @@ public class AlbumRepository {
 
         parameters.put("NAME",album.getName());
         parameters.put("ARTIST",album.getArtist());
+        parameters.put("IMG_URL",album.getImgUrl());
         parameters.put("ID_USER",album.getIdUser());
 
         int insertId = inserter.executeAndReturnKey(parameters).intValue();
@@ -51,10 +56,12 @@ public class AlbumRepository {
         jdbc.update("UPDATE TABLE_ALBUM SET " +
                         "NAME = ?," +
                         "ARTIST = ?," +
+                        "IMG_URL = ?," +
                         "ID_USER = ? " +
                         "WHERE ID = ?",
                 album.getName(),
                 album.getArtist(),
+                album.getImgUrl(),
                 album.getIdUser(),
                 id
         );
@@ -73,6 +80,7 @@ public class AlbumRepository {
         album.setId(rs.getInt("ID"));
         album.setName(rs.getString("NAME"));
         album.setArtist(rs.getString("ARTIST"));
+        album.setImgUrl(rs.getString("IMG_URL"));
         album.setIdUser(rs.getInt("ID_USER"));
 
         return album;

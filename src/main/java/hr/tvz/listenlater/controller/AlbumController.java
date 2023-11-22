@@ -17,6 +17,11 @@ public class AlbumController {
 
     private final AlbumService albumService;
 
+    @GetMapping("/getAlbumsByUser/{id}")
+    public List<Album> getAlbumsByUser(@PathVariable final int id) {
+        return this.albumService.getAlbumsByUser(id);
+    }
+
     @GetMapping
     public ResponseEntity<List<Album>> getAllEntities() {
         List<Album> entities = this.albumService.getAllEntities();

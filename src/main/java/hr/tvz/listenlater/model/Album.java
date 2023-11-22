@@ -24,6 +24,9 @@ public class Album {
     @Column(name = "ARTIST")
     private String artist;
 
+    @Column(name = "IMG_URL")
+    private String imgUrl;
+
     @Column(name = "ID_USER")
     private int idUser;
 

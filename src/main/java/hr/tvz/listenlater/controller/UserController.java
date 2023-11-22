@@ -18,6 +18,12 @@ public class UserController {
 
     private final UserService userService;
 
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody final LoginDTO loginDTO) {
+        User loggedUser = this.userService.login(loginDTO);
+        return new ResponseEntity<>(loggedUser, HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<List<User>> getAllEntities() {
         List<User> entities = this.userService.getAllEntities();
@@ -28,11 +34,6 @@ public class UserController {
     public ResponseEntity<User> getEntity(@PathVariable final int id) {
         User entity = this.userService.getEntity(id);
         return new ResponseEntity<>(entity, HttpStatus.OK);
-    }
-    @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody final LoginDTO loginDTO) {
-        User loggedUser = this.userService.login(loginDTO);
-        return new ResponseEntity<>(loggedUser, HttpStatus.OK);
     }
 
     @PostMapping
