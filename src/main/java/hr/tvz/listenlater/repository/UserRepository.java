@@ -24,6 +24,15 @@ public class UserRepository {
                 .usingGeneratedKeyColumns("ID");
     }
 
+    public User findByEmail(String email) {
+        var query = jdbc.query("SELECT * FROM TABLE_USER WHERE EMAIL = '" + email + "' ",
+                this::mapRowToUser);
+        if (query.size() != 0) {
+            return query.get(0);
+        }
+        return null;
+    }
+
     public List<User> getAllEntities() {
         return jdbc.query("SELECT * FROM TABLE_USER",
                 this::mapRowToUser);

@@ -1,10 +1,10 @@
 package hr.tvz.listenlater.controller;
 
+import hr.tvz.listenlater.model.LoginDTO;
 import hr.tvz.listenlater.model.User;
 import hr.tvz.listenlater.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +28,11 @@ public class UserController {
     public ResponseEntity<User> getEntity(@PathVariable final int id) {
         User entity = this.userService.getEntity(id);
         return new ResponseEntity<>(entity, HttpStatus.OK);
+    }
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody final LoginDTO loginDTO) {
+        User loggedUser = this.userService.login(loginDTO);
+        return new ResponseEntity<>(loggedUser, HttpStatus.OK);
     }
 
     @PostMapping

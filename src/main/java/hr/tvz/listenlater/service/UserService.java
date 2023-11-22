@@ -1,5 +1,6 @@
 package hr.tvz.listenlater.service;
 
+import hr.tvz.listenlater.model.LoginDTO;
 import hr.tvz.listenlater.model.User;
 import hr.tvz.listenlater.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,15 @@ public class UserService {
 
     @Autowired
     private final UserRepository userRepository;
+
+    public User login(LoginDTO loginDTO) {
+        User user = this.userRepository.findByEmail(loginDTO.getEmail());
+
+        if(user != null && loginDTO.getPassword().equals(user.getPassword())) {
+            return user;
+        }
+        return null;
+    }
 
     public List<User> getAllEntities() {
         return this.userRepository.getAllEntities();
