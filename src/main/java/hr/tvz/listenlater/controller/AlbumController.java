@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/albums")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class AlbumController {
 
     private final AlbumService albumService;
