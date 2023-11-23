@@ -38,7 +38,21 @@ public class AlbumRepository {
                 this::mapRowToAlbum).get(0);
     }
 
+    public Album findByImgUrl(String imgUrl) {
+        var query = jdbc.query("SELECT * FROM TABLE_ALBUM WHERE IMG_URL = '" + imgUrl + "' ",
+                this::mapRowToAlbum);
+        if (!query.isEmpty()) {
+            return query.get(0);
+        }
+        return null;
+    }
+
     public Album addNewEntity(Album album) {
+        Album searchByImgUrl = findByImgUrl(album.getImgUrl());
+        if (searchByImgUrl != null) {
+            return null;
+        }
+
         Map<String,Object> parameters = new HashMap<>();
 
         parameters.put("NAME",album.getName());

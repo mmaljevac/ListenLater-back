@@ -28,7 +28,7 @@ public class UserRepository {
     public User findByEmail(String email) {
         var query = jdbc.query("SELECT * FROM TABLE_USER WHERE EMAIL = '" + email + "' ",
                 this::mapRowToUser);
-        if (query.size() != 0) {
+        if (!query.isEmpty()) {
             return query.get(0);
         }
         return null;
@@ -38,6 +38,20 @@ public class UserRepository {
         String sql = "UPDATE TABLE_USER SET PASSWORD = ? WHERE ID = ?";
         try {
             int rowsAffected = jdbc.update(sql, newPassword, id);
+            if (rowsAffected == 1) {
+                return getEntity(id);
+            }
+            return null;
+        } catch (DataAccessException e) {
+            throw e;
+        }
+    }
+
+    public User updatePermissions(int id) {
+        User user = this.getEntity(id);
+        String sql = "UPDATE TABLE_USER SET IS_ADMIN = ? WHERE ID = ?";
+        try {
+            int rowsAffected = jdbc.update(sql, !user.isAdmin(), id);
             if (rowsAffected == 1) {
                 return getEntity(id);
             }

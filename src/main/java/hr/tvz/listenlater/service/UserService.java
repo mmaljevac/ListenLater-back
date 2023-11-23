@@ -24,6 +24,7 @@ public class UserService {
         }
         return null;
     }
+
     public User changePassword(int id, String currentPassword, String newPassword) {
         User user = this.userRepository.getEntity(id);
 
@@ -31,6 +32,10 @@ public class UserService {
             return this.userRepository.changePassword(id, newPassword);
         }
         return null;
+    }
+
+    public User updatePermissions(int id) {
+        return this.userRepository.updatePermissions(id);
     }
 
     public List<User> getAllEntities() {

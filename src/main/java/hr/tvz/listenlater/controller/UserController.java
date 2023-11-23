@@ -24,9 +24,15 @@ public class UserController {
         User loggedUser = this.userService.login(loginDTO);
         return new ResponseEntity<>(loggedUser, HttpStatus.OK);
     }
+
     @PatchMapping("/changePassword/{id}")
     public User changePassword(@PathVariable final int id, @RequestBody final ChangePasswordDTO passwords) {
         return this.userService.changePassword(id, passwords.getCurrentPassword(), passwords.getNewPassword());
+    }
+
+    @PatchMapping("/updatePermissions/{id}")
+    public User updatePermissions(@PathVariable final int id) {
+        return this.userService.updatePermissions(id);
     }
 
     @GetMapping
