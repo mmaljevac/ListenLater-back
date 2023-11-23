@@ -48,11 +48,6 @@ public class AlbumRepository {
     }
 
     public Album addNewEntity(Album album) {
-        Album searchByImgUrl = findByImgUrl(album.getImgUrl());
-        if (searchByImgUrl != null) {
-            return null;
-        }
-
         Map<String,Object> parameters = new HashMap<>();
 
         parameters.put("NAME",album.getName());
