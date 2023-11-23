@@ -24,6 +24,14 @@ public class UserService {
         }
         return null;
     }
+    public User changePassword(int id, String currentPassword, String newPassword) {
+        User user = this.userRepository.getEntity(id);
+
+        if(user != null && user.getPassword().equals(currentPassword)) {
+            return this.userRepository.changePassword(id, newPassword);
+        }
+        return null;
+    }
 
     public List<User> getAllEntities() {
         return this.userRepository.getAllEntities();

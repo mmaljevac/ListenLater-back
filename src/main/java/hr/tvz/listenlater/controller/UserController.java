@@ -1,5 +1,6 @@
 package hr.tvz.listenlater.controller;
 
+import hr.tvz.listenlater.model.ChangePasswordDTO;
 import hr.tvz.listenlater.model.LoginDTO;
 import hr.tvz.listenlater.model.User;
 import hr.tvz.listenlater.service.UserService;
@@ -22,6 +23,10 @@ public class UserController {
     public ResponseEntity<User> login(@RequestBody final LoginDTO loginDTO) {
         User loggedUser = this.userService.login(loginDTO);
         return new ResponseEntity<>(loggedUser, HttpStatus.OK);
+    }
+    @PatchMapping("/changePassword/{id}")
+    public User changePassword(@PathVariable final int id, @RequestBody final ChangePasswordDTO passwords) {
+        return this.userService.changePassword(id, passwords.getCurrentPassword(), passwords.getNewPassword());
     }
 
     @GetMapping

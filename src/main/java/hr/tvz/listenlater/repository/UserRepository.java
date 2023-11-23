@@ -1,6 +1,7 @@
 package hr.tvz.listenlater.repository;
 
 import hr.tvz.listenlater.model.User;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -31,6 +32,19 @@ public class UserRepository {
             return query.get(0);
         }
         return null;
+    }
+
+    public User changePassword(int id, String newPassword) {
+        String sql = "UPDATE TABLE_USER SET PASSWORD = ? WHERE ID = ?";
+        try {
+            int rowsAffected = jdbc.update(sql, newPassword, id);
+            if (rowsAffected == 1) {
+                return getEntity(id);
+            }
+            return null;
+        } catch (DataAccessException e) {
+            throw e;
+        }
     }
 
     public List<User> getAllEntities() {
