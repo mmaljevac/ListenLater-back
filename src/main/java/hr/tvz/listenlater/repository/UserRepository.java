@@ -79,6 +79,7 @@ public class UserRepository {
     }
 
     public Boolean deleteEntity(int id) {
+        jdbc.update("DELETE FROM TABLE_ALBUM WHERE ID_USER = " + id);
         jdbc.update("DELETE FROM TABLE_USER WHERE ID = " + id);
         return true;
     }
